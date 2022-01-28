@@ -1,0 +1,8 @@
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: weplay-link-ca
+spec:
+  ca:
+    secretName: weplay-link-key-pair

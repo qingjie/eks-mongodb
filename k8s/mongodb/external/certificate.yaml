@@ -1,0 +1,26 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mongodb-external
+  namespace: mongodb
+spec:
+  isCA: false
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  dnsNames:
+  - my-mongodb-0.my-mongodb-svc.mongodb.svc.cluster.local
+  - my-mongodb-1.my-mongodb-svc.mongodb.svc.cluster.local
+  - my-mongodb-2.my-mongodb-svc.mongodb.svc.cluster.local
+  - my-mongodb-0.weplay.link
+  - my-mongodb-1.weplay.link
+  - my-mongodb-2.weplay.link
+  secretName: mongodb-external-key-pair
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 4096
+  issuerRef:
+    name: weplay-link-ca
+    kind: ClusterIssuer
+    group: cert-manager.io
